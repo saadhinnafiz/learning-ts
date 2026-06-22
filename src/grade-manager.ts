@@ -26,6 +26,7 @@
  *    - returns the updated student
  */
 
+// Type declerations and global variables
 type Student = {
   id: number;
   name: string;
@@ -34,6 +35,8 @@ type Student = {
 };
 
 let nextStudentId = 3941; //starts after existing id of 3940
+
+// Array of students
 
 const students: Student[] = [
   {
@@ -56,14 +59,29 @@ const students: Student[] = [
   },
 ];
 
-// function
+// Function to add new student
 
-function addStudent(newStudent: Omit<Student, "id" | "status">): Student {
+function addStudent(name: string, grade: number): Student {
   const addNewStudent: Student = {
     id: nextStudentId++,
-    ...newStudent,
-    status: newStudent.grade >= 60 ? "passing" : "failing",
+    name,
+    grade,
+    status: grade >= 60 ? "passing" : "failing",
   };
   students.push(addNewStudent);
   return addNewStudent;
 }
+
+addStudent("Aishath Azka Waheed", 85);
+addStudent("Ibrahim Ayal Waheed", 60);
+addStudent("Muzuna Mohamed", 70);
+
+console.log(students);
+
+// Function to find top student
+function topStudent(): Student | undefined {
+  const sortedStudents = [...students].sort((a, b) => b.grade - a.grade);
+  return sortedStudents[0];
+}
+
+console.log("The top student is:", topStudent());
