@@ -85,3 +85,19 @@ function topStudent(): Student | undefined {
 }
 
 console.log("The top student is:", topStudent());
+
+// function to update grade
+
+function updateGrade(id: number, newGrade: number): Student | undefined {
+  const selectedStudent = students.find((student) => student.id === id);
+  if (!selectedStudent) {
+    console.error(`Student ID ${id} not found`);
+    return;
+  }
+  selectedStudent.grade = newGrade;
+  selectedStudent.status = newGrade >= 60 ? "passing" : "failing";
+  return selectedStudent;
+}
+
+console.log(updateGrade(3938, 55)); // changed to failing
+console.log(updateGrade(9999, 80)); // show error
